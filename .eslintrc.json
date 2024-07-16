@@ -1,0 +1,53 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "es2020": true
+  },
+  "extends": [
+    "eslint:recomendado",
+    "plugin:react/recomendado",
+    "plugin:react/jsx-runtime",
+    "plugin:react-hooks/recomendado",
+    "plugin:prettier/recomendado"
+  ],
+  "ignorePatterns": [
+    "dist"
+  ],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "settings": {
+    "react": {
+      "versão": "detect"
+    }
+  },
+  "plugins": [
+    "react-refresh",
+    "prettier",
+    "import-helpers"
+  ],
+  "regras": {
+    "import-helpers/order-imports": [
+      "aviso",
+      {
+        "novas linhas entre": "sempre",
+        "grupos": [
+          "/^node:*/",
+          "módulo",
+          "/^@\\//",
+          [
+            "pai",
+            "irmão",
+            "índice"
+          ]
+        ],
+        "alfabetizar": {
+          "ordem": "asc",
+          "ignoreCase": true
+        }
+      }
+    ]
+  }
+}
