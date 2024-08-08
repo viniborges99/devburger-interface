@@ -1,12 +1,16 @@
+import HomeLogo from '../../assets/logo-home.png'
+import { CategoryCarousel } from '../../components/CategoryCarousel'
 
+import { Container, HomeImg } from './styles'
 
 
 
 export function Home(){
 
     return(
-        <div>
-            <h1>Welcome to the Home Page</h1>
-        </div>
+        <Container>
+            <HomeImg src ={HomeLogo} alt ='logo da home'/>
+            <CategoryCarousel/>
+        </Container>
     )
 }
