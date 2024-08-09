@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import PropTypes from 'prop-types'
 
 const UserContext = createContext({})
@@ -14,6 +14,17 @@ export const UserProvider = ({ children }) => {
 
         await localStorage.setItem('devburguer:userData', JSON.stringify(userInfo))
     }
+
+    useEffect(() => {
+        const loadUserData = async () => {
+            const clientInfo = await localStorage.getItem('devburguer:userData')
+            if (clientInfo) {
+                setUserData(JSON.parse(clientInfo))
+            }
+        }
+        loadUserData()
+
+    }, [])
 
 
     return (
