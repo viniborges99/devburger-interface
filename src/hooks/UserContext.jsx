@@ -1,21 +1,23 @@
-import React, {createContext, useContext, useState} from "react";
-import PropTypes from  'prop-types'
+import React, { createContext, useContext, useState } from "react";
+import PropTypes from 'prop-types'
 
 const UserContext = createContext({})
 
-export const UserProvider = ({children}) =>{
+export const UserProvider = ({ children }) => {
 
-    const [userData,setUserData ] = useState({})//guardar informaçoes
+    const [userData, setUserData] = useState({})//guardar informaçoes
 
 
 
-    const putUserData = (userInfo)=>{//função que quando for chamada vai gravar os dados do usuario
+    const putUserData = async (userInfo) => {
         setUserData(userInfo)
+
+        await localStorage.setItem('devburguer:userData', JSON.stringify(userInfo))
     }
-    
+
 
     return (
-        <UserContext.Provider value={{putUserData,userData}}>
+        <UserContext.Provider value={{ putUserData, userData }}>
             {children}
         </UserContext.Provider>
     )
@@ -23,17 +25,17 @@ export const UserProvider = ({children}) =>{
 
 
 
-export const useUser = ()=>{
+export const useUser = () => {
     const context = useContext(UserContext)
 
-    if(!context){
+    if (!context) {
         throw new Error('useUser must be used within a UserContext')
     }
 
     return context;
 }
 
-UserProvider.propTypes= {
+UserProvider.propTypes = {
     children: PropTypes.node
 }
 
