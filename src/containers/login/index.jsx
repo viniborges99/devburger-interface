@@ -1,12 +1,10 @@
-import { useForm } from "react-hook-form"
-import { yupResolver } from "@hookform/resolvers/yup"
-import * as yup from "yup"
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 import { api } from "../../services/api";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useUser } from '../../hooks/UserContext';
-
-
 
 import {
   Container,
@@ -21,8 +19,7 @@ import Logo from '../../assets/logo.svg';
 import { Button } from '../../components/button';
 
 export function Login() {
-  const { putUserData, userData } = useUser()
-
+  const { putUserData, userData } = useUser();
   const navigate = useNavigate();
 
   const schema = yup
@@ -30,7 +27,7 @@ export function Login() {
       email: yup.string().email('Digite um e-mail válido').required('O e-mail é obrigatório'),
       password: yup.string().min(6, 'A senha deve ter pelo menos 6 caracteres').required('Digite uma senha'),
     })
-    .required()
+    .required();
 
   const {
     register,
@@ -38,15 +35,14 @@ export function Login() {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
-  })
+  });
 
-  const onSubmit = async (data) => {
-
+  const onSubmit = async (formData) => {
     try {
-      const { data } = await toast.promise(
+      const response = await toast.promise(
         api.post('/sessions', {
-          email: data.email,
-          password: data.password,
+          email: formData.email,
+          password: formData.password,
         }),
         {
           pending: 'Verificando seus dados',
@@ -62,13 +58,12 @@ export function Login() {
         }
       );
 
+      // O `response.data` contém os dados do usuário
+      putUserData(response.data);
 
-      console.log(response);
     } catch (error) {
       console.error('Erro ao fazer login:', error);
     }
-
-    putUserData(data)
   };
 
   return (
@@ -98,7 +93,6 @@ export function Login() {
         </Form>
         <p>Não possui conta? <Link to="/cadastro">Clique aqui. </Link></p>
       </RightContainer>
-
     </Container>
   );
 }
