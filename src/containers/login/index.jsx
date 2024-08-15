@@ -37,12 +37,12 @@ export function Login() {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (formData) => {
     try {
       const response = await toast.promise(
         api.post('/sessions', {
-          email: data.email,
-          password: data.password,
+          email: formData.email,
+          password: formData.password,
         }),
         {
           pending: 'Verificando seus dados',
@@ -59,7 +59,7 @@ export function Login() {
       );
 
       // O `response.data` contém os dados do usuário
-      putUserData(response.data);
+      putUserData(response.formData);
       navigate('/')
 
     } catch (error) {

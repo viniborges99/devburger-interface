@@ -16,6 +16,7 @@ export function CategoryCarousel() {
         async function loadCategories() {
             const { data } = await api.get('categories')
 
+
             setCategories(data)
 
         }
@@ -30,7 +31,7 @@ export function CategoryCarousel() {
         { width: 900, itemsToShow: 4 },
         { width: 1300, itemsToShow: 5 }
     ]
-
+    console.log(categories)
     return (
         <Container>
             <Carousel itemsToShow={3} style={{ width: '90%' }} breakPoints={breakPoints}>
