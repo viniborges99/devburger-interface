@@ -9,7 +9,7 @@ export const UserProvider = ({ children }) => {
 
 
 
-    const putUserData = async (userInfo) => {
+    const putUserData = async userInfo => {
         setUserData(userInfo)
 
         await localStorage.setItem('devburguer:userData', JSON.stringify(userInfo))
