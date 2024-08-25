@@ -7,15 +7,13 @@ export default [
     languageOptions: {
       ecmaVersion: 2021,
       sourceType: 'module',
-      parser: '@babel/eslint-parser',
       parserOptions: {
-        requireConfigFile: false,
-        babelOptions: {
-          presets: ['@babel/preset-react'],
+        ecmaFeatures: {
+          jsx: true,
         },
       },
       globals: {
-        // Add your global variables here
+        // Adicione variáveis globais aqui, se necessário
       },
     },
     plugins: {
@@ -28,7 +26,7 @@ export default [
       'plugin:react/recommended',
       'plugin:react-hooks/recommended',
       'plugin:prettier/recommended',
-      'prettier', // eslint-config-prettier
+      eslintConfigPrettier, // eslint-config-prettier
     ],
     rules: {
       'prettier/prettier': 'error',
@@ -42,3 +40,4 @@ export default [
     },
   },
 ];
+

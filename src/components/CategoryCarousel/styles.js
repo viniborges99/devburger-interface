@@ -37,8 +37,13 @@ export const ContainerItems = styled.div`
 
 `
 export const Image = styled.img`
-    width: 200px;
-    border-radius:10px
+    width: 240.05px;
+    height: 231.99px;
+    top: 0.01px;
+    left: 673.51px;
+    gap: 10px;
+    opacity: 0px;
+
 
 `
 export const Button = styled.button`

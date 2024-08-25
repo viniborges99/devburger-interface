@@ -5,10 +5,10 @@ export const api = axios.create({
 });
 
 
-api.interceptors.request.use( async config => {
+api.interceptors.request.use( async (config) => {
     const userData = await localStorage.getItem('devburguer:userData')
-    const token = JSON.parse(userData).data.token
-    config.headers.authorization = `Bearer${token}`
+    const token = userData && JSON.parse(userData).token
+    config.headers.Authorization = `Bearer ${token}`
     return config
 }
 
